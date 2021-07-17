@@ -1,6 +1,6 @@
 # conFusion
 
-![conFusion](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.treehugger.com%2Fconfusion-good-for-you-learning-openness-4862744&psig=AOvVaw3r_9fF37o3wNk7omVBq0Ys&ust=1626625933438000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCPib2PvD6vECFQAAAAAdAAAAABAD)
+![conFusion](https://www.treehugger.com/thmb/WIL_P-KAhldEQFuxEsQhNe474pw=/4294x2916/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2019__11__illustration_of_confusion-a524e19c90b14de18eb75d978e50bfc5.jpg)
 
 ## What it does
 
