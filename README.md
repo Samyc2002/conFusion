@@ -4,7 +4,7 @@
 
 ## What it does
 
-conFusion is a backend application that inplements server side routing, authentication, file management and data handling.
+conFusion is a backend application that implements server side routing, authentication, file management and data handling.
 
 ## How to run it
 
