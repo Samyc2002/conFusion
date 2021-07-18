@@ -17,7 +17,7 @@ favouriteRouter.use(bodyParser.json());
 favouriteRouter.route('/').options(cors.corsWithOptions, function (req, res) {
   res.sendStatus(200);
 }).get(cors.cors, authenticate.verifyUser, function (req, res, next) {
-  Favourites.find({}).populate('user').populate('dishes').then(function (favourites) {
+  Favourites.find(req.query).populate('user').populate('dishes').then(function (favourites) {
     // extract favourites that match the req.user.id
     if (favourites) {
       user_favourites = favourites.filter(function (fav) {
@@ -135,7 +135,9 @@ favouriteRouter.route('/').options(cors.corsWithOptions, function (req, res) {
 favouriteRouter.route('/:dishId').options(cors.corsWithOptions, function (req, res) {
   res.sendStatus(200);
 }).get(cors.cors, authenticate.verifyUser, function (req, res, next) {
-  Favourites.find({}).populate('user').populate('dishes').then(function (favourites) {
+  Favourites.findOne({
+    user: req.user._id
+  }).populate('user').populate('dishes').then(function (favourites) {
     if (favourites) {
       var favs = favourites.filter(function (fav) {
         return fav.user._id.toString() === req.user.id.toString();
@@ -176,10 +178,13 @@ favouriteRouter.route('/:dishId').options(cors.corsWithOptions, function (req, r
       if (d_id._id) return d_id._id.toString() === req.params.dishId.toString();
     })) user.dishes.push(req.params.dishId);
     user.save().then(function (userFavs) {
-      res.statusCode = 201;
-      res.setHeader("Content-Type", "application/json");
-      res.json(userFavs);
-      console.log("Favourites Created");
+      Favourites.findById(userFavs._id).populate('user').populate('dishes').then(function (favourite) {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(userFavs);
+      })["catch"](function (err) {
+        return next(err);
+      });
     }, function (err) {
       return next(err);
     })["catch"](function (err) {
@@ -203,9 +208,13 @@ favouriteRouter.route('/:dishId').options(cors.corsWithOptions, function (req, r
         return dishid._id.toString() !== req.params.dishId;
       });
       user.save().then(function (result) {
-        res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
-        res.json(result);
+        Favourites.findById(result._id).populate('user').populate('dishes').then(function (favourite) {
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.json(userFavs);
+        })["catch"](function (err) {
+          return next(err);
+        });
       }, function (err) {
         return next(err);
       });

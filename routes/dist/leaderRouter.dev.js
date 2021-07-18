@@ -18,7 +18,7 @@ leaderRouter.use(bodyparser.json()); // collection router goes here
 leaderRouter.route('/').options(cors.corsWithOptions, function (req, res) {
   res.sendStatus(200);
 }).get(cors.cors, function (req, res, next) {
-  Leaders.find({}).then(function (leaders) {
+  Leaders.find(req.query).then(function (leaders) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(leaders);

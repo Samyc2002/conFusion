@@ -18,7 +18,7 @@ promoRouter.use(bodyparser.json()); // collection router goes here
 promoRouter.route('/').options(cors.corsWithOptions, function (req, res) {
   res.sendStatus(200);
 }).get(cors.cors, function (req, res, next) {
-  Promotions.find({}).then(function (promotions) {
+  Promotions.find(req.query).then(function (promotions) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(promotions);

@@ -34,6 +34,8 @@ var uploadRouter = require('./routes/uploadRouter');
 
 var favouriteRouter = require('./routes/favouriteRouter');
 
+var commentRouter = require('./routes/commentRouter');
+
 var indexRouter = require('./routes/index');
 
 var usersRouter = require('./routes/users');
@@ -70,7 +72,8 @@ app.use('/dishes', dishRouter);
 app.use('/promotions', promoRouter);
 app.use('/leaders', leaderRouter);
 app.use('/imageUpload', uploadRouter);
-app.use('/favorites', favouriteRouter); // catch 404 and forward to error handler
+app.use('/favorites', favouriteRouter);
+app.use('/comments', commentRouter); // catch 404 and forward to error handler
 
 app.use(function (req, res, next) {
   next(createError(404));
