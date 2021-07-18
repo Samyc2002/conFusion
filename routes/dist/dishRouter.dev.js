@@ -21,7 +21,10 @@ dishRouter.route('/').options(cors.corsWithOptions, function (req, res) {
   Dishes.find(req.query).populate('comments.author').then(function (dishes) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    res.json(dishes);
+    res.json({
+      dishes: dishes,
+      ok: true
+    });
   }, function (err) {
     next(err);
   })["catch"](function (err) {

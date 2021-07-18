@@ -20,7 +20,7 @@ dishRouter.route('/')
     .then((dishes) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dishes);
+        res.json({ dishes: dishes, ok: true });
     }, (err) => {
         next(err);
     })
